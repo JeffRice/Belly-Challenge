@@ -168,10 +168,6 @@ nav a:hover {
 
 
 
-
-
-
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -210,6 +206,8 @@ nav a:hover {
         margin: 0 0.7%;
     }
 }
+
+
 
 @media only screen and (min-width: 768px) {
 
@@ -391,4 +389,73 @@ nav a:hover {
     h3 {
         page-break-after: avoid;
     }
+}
+
+
+/* ==============
+    ajax response
+   ============== */
+
+.data-list-item img {
+}
+
+.data-list-item {
+    display: block;
+    margin-bottom: 30px;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    color: white;
+    background: #ffffff;
+}
+
+.data-list-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666666;
+}
+
+.data-list-category {
+    font-size: 10px;
+    color: #919191;
+}
+
+.data-list-distance {
+    font-size: 10px;
+    color: #919191;
+}
+
+.data-list-open {
+    font-size: 10px;
+    color: #919191;
+}
+
+.col-1-4 {
+  width: 25%;
+  font-size: 10px;
+  color: #919191;
+  float: left;
+}
+
+.col-1-4r {
+  width: 25%;
+  font-size: 10px;
+  color: #919191;
+  float: right;
+}
+
+.col-1-2 {
+  width: 50%;
+  font-size: 10px;
+  color: #919191;
+  float: left;
+}
+
+
+.col-1-2 .title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666666;
 }

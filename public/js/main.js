@@ -89,12 +89,15 @@ for (var i = 0; i < venues.length; i++) {
    open = 'closed'
 }
 }
+
    else{
    open = 'no hourly info'
 }
-   $( "#4square" ).append( name + ' ' + ' ' + category + ' ' + distance_miles + ' miles away ' + open + ' ' + "<img src='" + icon + "' />" +  '<br />' );   
+
+   $( "#4square" ).append( "<div class='data-list-item'>" + "<div class='col-1-4'><img src='" + icon + "' />" + '</div>' + "<div class='col-1-2'><span class='title'>" + name + "</span><br />" + distance_miles + " miles away </br>" + category + "</div>" + "<div class='col-1-4r'>" + open + '</div></div><br /><br /><hr>' );
 }
 })
+
 
 
 
