@@ -63,7 +63,7 @@ apiUrl: 'https://api.foursquare.com/'
 
 /* Query foursquare API for venue recommendations near the current location. */
 
-$.getJSON(config.apiUrl + 'v2/venues/explore?v=20140128&ll=' + latitude + ',' + longitude + '&oauth_token=' + token, { limit: 20, enableHighAccuracy: true }, function(data) {
+$.getJSON(config.apiUrl + 'v2/venues/explore?v=20140128&ll=' + latitude + ',' + longitude + '&oauth_token=' + token, { limit: 50, enableHighAccuracy: true, sortByDistance: true }, function(data) {
 venues = data['response']['groups'][0]['items'];
 console.log('got venues json');
 /* Loop through venues and assign variables to their returned properties. */
@@ -72,18 +72,27 @@ for (var i = 0; i < venues.length; i++) {
    name = venues[i]['venue']['name'];
    category = venues[i]['venue']['categories'][0]['name'];
    icon = venues[i]['venue']['categories'][0]['icon']['prefix'];
-   icon = icon.slice(0, -1); // remove trailing "_" character
+   icon = icon.slice(0, 35) + icon.slice(38, -1); // remove trailing "_" characters
    icon = icon + venues[i]['venue']['categories'][0]['icon']['suffix'];
-   address = venues[i]['venue']['location']['address'];
    city = venues[i]['venue']['location']['city'];
    state = venues[i]['venue']['location']['state'];
    distance_meters = venues[i]['venue']['location']['distance'];
    distance_miles = distance_meters / 1609.34;
    distance_miles = Math.round(distance_miles*100)/100;
-   x = 1; // in the product use i for index below
-   $( "#4square" ).append( name + '<br />' );
-
-
+/* Set venue open variable if its available */
+   if(venues[i]['venue']['hours']){
+   open = venues[i]['venue']['hours']['isOpen'];
+   if (open === true){
+   open = 'open';
+}
+   else {
+   open = 'closed'
+}
+}
+   else{
+   open = 'no hourly info'
+}
+   $( "#4square" ).append( name + ' ' + ' ' + category + ' ' + distance_miles + ' miles away ' + open + ' ' + "<img src='" + icon + "' />" +  '<br />' );   
 }
 })
 
