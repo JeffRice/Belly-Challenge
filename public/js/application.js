@@ -12,6 +12,7 @@
 //= require lib/jquery-2.1.0.min
 //= require lib/apisamples.js
 //= require lib/jquery.ba-bbq
+//= require lib/localforage
 //= require main
 
 
