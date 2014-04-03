@@ -38,6 +38,11 @@ $.bbq.pushState({}, 1)
 doAuthRedirect();
 }
 
+/* Message while retrieving geo data */
+output.innerHTML = "<p>Locating…</p>";
+
+navigator.geolocation.getCurrentPosition(success, error);
+
 // Check if the geolocation object is available
 if (!navigator.geolocation){
   output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
@@ -142,8 +147,5 @@ localforage.getItem('lat', function(lat) {
 output.innerHTML = "Unable to retrieve your location";
 };
 
-/* Message while retrieving geo data */
-output.innerHTML = "<p>Locating…</p>";
 
-navigator.geolocation.getCurrentPosition(success, error);
 });
