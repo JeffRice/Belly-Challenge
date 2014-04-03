@@ -13,7 +13,8 @@
 //= require lib/apisamples.js
 //= require lib/jquery.ba-bbq
 //= require lib/localforage
-//= require main
+//= require lib/leaflet
+//= require main2
 
 
 

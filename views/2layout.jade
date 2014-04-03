@@ -7,11 +7,18 @@ html
     meta(name='description', content='')
     meta(name='author', content='')
     title #{title} | Hackathon Starter
-    != css('styles')
+    link(href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css')
+    != css('main')
+    != css('normalize')
+    != css('mapstyles')
     != css('leaflet')
-    link(rel='stylesheet', href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css')
-    script(type='text/javascript', src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js')
-    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    != css('apisamples')
     != js('application')
+
   body
-    block content
+    #wrap
+      include partials/navigation
+      .container
+        include partials/flash
+        block content
+    include partials/footer
