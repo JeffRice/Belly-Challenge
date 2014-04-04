@@ -7,16 +7,7 @@ authUrl: 'https://foursquare.com/',
 apiUrl: 'https://api.foursquare.com/'
 };
 
-// Oauth redirect
-function doAuthRedirect() {
-var redirect = window.location.href.replace(window.location.hash, '');
-var url = config.authUrl + 'oauth2/authenticate?response_type=token&client_id=' + config.apiKey +
-'&redirect_uri=' + encodeURIComponent(redirect) +
-'&state=' + encodeURIComponent($.bbq.getState('req') || 'users/self');
-window.location.href = url;
-};
-
-// If there is a token in the state, consume it
+// Check for an Oauth token, set if available
 if ($.bbq.getState('access_token')) {
 console.log('token available');
 var token = $.bbq.getState('access_token');
@@ -38,17 +29,22 @@ $.bbq.pushState({}, 1)
 doAuthRedirect();
 }
 
+// Oauth redirect
+function doAuthRedirect() {
+var redirect = window.location.href.replace(window.location.hash, '');
+var url = config.authUrl + 'oauth2/authenticate?response_type=token&client_id=' + config.apiKey +
+'&redirect_uri=' + encodeURIComponent(redirect) +
+'&state=' + encodeURIComponent($.bbq.getState('req') || 'users/self');
+window.location.href = url;
+};
+
+
 /* Message while retrieving geo data */
 output.innerHTML = "<p>Locating…</p>";
 
 navigator.geolocation.getCurrentPosition(success, error);
 
-// Check if the geolocation object is available
-if (!navigator.geolocation){
-  output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-  return;
-  }
-
+// If geolocation is available
 function success(position) {
 // cache coords on successfull retrieval
 localforage.setItem('lat', position.coords.latitude, function(result) {
@@ -60,7 +56,6 @@ localforage.setItem('lng', position.coords.longitude, function(result) {
 
 var lat = position.coords.latitude;
 var lng = position.coords.longitude;
-console.log('got position');
 makeMap(lat, lng);
 };
 
@@ -90,7 +85,6 @@ $.getJSON(config.apiUrl + 'v2/venues/explore?v=20140128&ll=' + lat + ',' + lng +
 venues = data['response']['groups'][0]['items'];
 
 localforage.setItem('venues', venues, function(result) {
-    console.log(result);
 });
 
 console.log('got venues json');
@@ -112,13 +106,13 @@ for (var i = 0; i < venues.length; i++) {
 /* Set venue open variable if its available */
    if(venues[i]['venue']['hours']){
    open = venues[i]['venue']['hours']['isOpen'];
-   if (open === true){
-   open = "<span class='open'>OPEN</span>";
-}
-   else {
-   open = 'CLOSED'
-}
-}
+     if (open === true){
+     open = "<span class='open'>OPEN</span>";
+  }
+     else {
+     open = 'CLOSED'
+  }
+  }
    else{
    open = 'no hourly info'
 }
