@@ -1,12 +1,5 @@
 $(document).ready(function() {
 
-var output = document.getElementById("out");
-var config = {
-apiKey: 'OUZWCMD3MYTVZQEA1P3RDHYAMECBHZ2POAL5D4XIYVIO3HEC',
-authUrl: 'https://foursquare.com/',
-apiUrl: 'https://api.foursquare.com/'
-};
-
 // Check for an Oauth token, set if available
 if ($.bbq.getState('access_token')) {
 console.log('token available');
@@ -46,7 +39,7 @@ navigator.geolocation.getCurrentPosition(success, error);
 
 // If geolocation is available
 function success(position) {
-// cache coords on successfull retrieval
+// cache coords on successful retrieval
 localforage.setItem('lat', position.coords.latitude, function(result) {
     console.log(result);
 });
@@ -80,6 +73,13 @@ var circle = L.circle([lat, lng], 20, {
 output.innerHTML = '<p>Latitude is ' + lat + '° <br>Longitude is ' + lng + '°</p>';
 
 /* Query foursquare API for venue recommendations near the current location. */
+
+var output = document.getElementById("out");
+var config = {
+apiKey: 'OUZWCMD3MYTVZQEA1P3RDHYAMECBHZ2POAL5D4XIYVIO3HEC',
+authUrl: 'https://foursquare.com/',
+apiUrl: 'https://api.foursquare.com/'
+};
 
 $.getJSON(config.apiUrl + 'v2/venues/explore?v=20140128&ll=' + lat + ',' + lng + '&oauth_token=' + token, { limit: 10, enableHighAccuracy: true, sortByDistance: true }, function(data) {
 venues = data['response']['groups'][0]['items'];
