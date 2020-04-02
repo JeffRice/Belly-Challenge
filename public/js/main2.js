@@ -76,7 +76,7 @@ output.innerHTML = '<p>Latitude is ' + lat + '° <br>Longitude is ' + lng + '°<
 
 var output = document.getElementById("out");
 var config = {
-apiKey: 'OUZWCMD3MYTVZQEA1P3RDHYAMECBHZ2POAL5D4XIYVIO3HEC',
+apiKey: 'KEY HERE',
 authUrl: 'https://foursquare.com/',
 apiUrl: 'https://api.foursquare.com/'
 };
